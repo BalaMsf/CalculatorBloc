@@ -23,3 +23,8 @@ class CalcClearEvent extends CalcEvent {
 
   CalcClearEvent(this.v1, this.v2);
 }
+
+class DeleteEvent extends CalcEvent {
+  String inputVal;
+  DeleteEvent(this.inputVal);
+}

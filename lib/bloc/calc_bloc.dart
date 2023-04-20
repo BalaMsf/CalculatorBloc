@@ -12,6 +12,20 @@ class CalcBloc extends Bloc<CalcEvent, CalcState> {
       if (event is CalcUserInputEvent) {
         emit(CalculateUserInputState(event.userInput));
       }
+      if (event is DeleteEvent) {
+        String input = '===>InputValue' + event.inputVal;
+        print(input);
+        if (event.inputVal.isNotEmpty) {
+          String inputCalc =
+              event.inputVal.substring(0, event.inputVal.length - 1);
+          String input = '===>deletedinput' + inputCalc;
+          print(input);
+          emit(CalculateUserInputState(inputCalc));
+        } else {
+          emit(CalculateUserInputState(''));
+        }
+      }
+
       if (event is CalculateResultEvent) {
         String userinput = event.resultValue.replaceAll('x', '*');
         Expression expression = Parser().parse(userinput);

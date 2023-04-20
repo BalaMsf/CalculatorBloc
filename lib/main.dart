@@ -79,10 +79,11 @@ class _HomePageState extends State<HomePage> {
                     child: BlocBuilder(
                         bloc: calcBloc,
                         builder: (context, state) {
+                          inputValue = (state is CalculateUserInputState)
+                              ? state.userInput
+                              : inputValue;
                           return Text(
-                            (state is CalculateUserInputState)
-                                ? state.userInput
-                                : inputValue,
+                            inputValue,
                             style: const TextStyle(
                                 fontSize: 24,
                                 color: Colors.black,
@@ -139,10 +140,7 @@ class _HomePageState extends State<HomePage> {
                   else if (index == 3) {
                     return MyCalcBtn(
                       btnClick: () {
-                        calcBloc.add(CalcUserInputEvent(inputValue =
-                            inputValue.substring(0, inputValue.length - 1)));
-
-                        // calcBloc.add(CalcUserInputEvent(inputValue));
+                        calcBloc.add(DeleteEvent(inputValue));
                       },
                       buttonText: buttons[index],
                     );
